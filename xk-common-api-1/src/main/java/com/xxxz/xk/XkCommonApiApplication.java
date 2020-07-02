@@ -1,0 +1,13 @@
+package com.xxxz.xk;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class XkCommonApiApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(XkCommonApiApplication.class, args);
+    }
+
+}
