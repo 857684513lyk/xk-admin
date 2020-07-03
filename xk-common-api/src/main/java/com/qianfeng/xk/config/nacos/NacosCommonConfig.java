@@ -34,13 +34,13 @@ public class NacosCommonConfig {
     @PostConstruct
     public void initNacos() {
         String appName = environment.getProperty("spring.application.name");// 拿到微服务的名字
-        String serverAddr = "118.31.17.120:8848";//开发环境用测试服务器的公网
+        String serverAddr = "49.234.211.151:8848";//开发环境用测试服务器的公网
         String[] activeProfiles = environment.getActiveProfiles();
         if (activeProfiles.length > 0) {
             if ("pro".equals(activeProfiles[0])) {
-                serverAddr = "172.16.25.162:8848";// 正式环境的私网
+                serverAddr = "172.17.0.4:8848";// 正式环境的私网
             } else if ("dev".equals(activeProfiles[0])) {
-                serverAddr = "118.31.17.120:8848";// 开发环境用测试服务器的公网
+                serverAddr = "49.234.211.151:8848";// 开发环境用测试服务器的公网
 
                 nacosDiscoveryProperties.setWatchDelay(2000L);// 从nacos获取服务列表的频率（2秒一次）
                 nacosDiscoveryProperties.setHeartBeatInterval(1);// 给nacos发送心跳的时间间隔
