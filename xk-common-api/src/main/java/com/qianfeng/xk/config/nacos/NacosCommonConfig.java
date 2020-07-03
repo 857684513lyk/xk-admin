@@ -28,6 +28,8 @@ public class NacosCommonConfig {
     @Resource
     private NacosDiscoveryProperties nacosDiscoveryProperties;// 这种方式是比较先进方式，看源码出来
 
+
+    
     @Resource
     Environment environment;
 
