@@ -19,7 +19,7 @@ import java.util.*;
  */
 @Component
 public class FastdfsClient {
-    private String WINDOW_UPLOAD_PATH = "N:" + File.separator + "upload/";
+    private String WINDOW_UPLOAD_PATH = "D:" + File.separator + "upload/";
     private String LINUX_UPLOAD_PATH = "/upload/";// 这个操作根本没有太大的必要，如果要压缩，需要先将文件保存到磁盘，然后再从磁盘中获取与二进制数据
     Logger logger = LoggerFactory.getLogger(FastdfsClient.class);
 

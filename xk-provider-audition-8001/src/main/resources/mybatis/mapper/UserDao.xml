@@ -6,19 +6,24 @@
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="roles" jdbcType="VARCHAR" property="roles" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="course_ids" jdbcType="VARCHAR" property="courseIds" />
+    <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_id, nick_name, real_name, `password`, phone, email, last_login_ip, last_login_time, 
-    roles, note
+    user_id, nick_name, real_name, `password`, phone, email, last_login_ip, last_login_time,
+    roles, note, photo, open_id, course_ids, creat_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where user_id = #{userId,jdbcType=BIGINT}
@@ -28,14 +33,16 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.xxxz.xk.pojo.entity.User" useGeneratedKeys="true">
-    insert into user (nick_name, real_name, `password`, 
-      phone, email, last_login_ip, 
-      last_login_time, roles, note
-      )
-    values (#{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{roles,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
-      )
+    insert into user (nick_name, real_name, `password`,
+      phone, email, last_login_ip,
+      last_login_time, roles, note,
+      photo, open_id, course_ids,
+      creat_time, update_time)
+    values (#{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{phone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR},
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{roles,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+      #{photo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{courseIds,jdbcType=VARCHAR},
+      #{creatTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.xxxz.xk.pojo.entity.User" useGeneratedKeys="true">
     insert into user
@@ -67,6 +74,21 @@
       <if test="note != null">
         note,
       </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="courseIds != null">
+        course_ids,
+      </if>
+      <if test="creatTime != null">
+        creat_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="nickName != null">
@@ -79,7 +101,7 @@
         #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
+        #{phone,jdbcType=CHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -96,6 +118,21 @@
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
       </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseIds != null">
+        #{courseIds,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xxxz.xk.pojo.entity.User">
@@ -111,7 +148,7 @@
         `password` = #{password,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=CHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -128,6 +165,21 @@
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
       </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseIds != null">
+        course_ids = #{courseIds,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
@@ -136,12 +188,17 @@
     set nick_name = #{nickName,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
       email = #{email,jdbcType=VARCHAR},
       last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       roles = #{roles,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR}
+      note = #{note,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR},
+      course_ids = #{courseIds,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>
