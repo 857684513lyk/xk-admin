@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxz.xk.dao.CourseOrderDao">
+  <resultMap id="BaseResultMap" type="com.xxxz.xk.pojo.entity.CourseOrder">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="pay_status" jdbcType="VARCHAR" property="payStatus" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_phone" jdbcType="CHAR" property="receiverPhone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_type" jdbcType="VARCHAR" property="payType" />
+    <result column="coupon_relief" jdbcType="DECIMAL" property="couponRelief" />
+    <result column="red_bag_relief" jdbcType="VARCHAR" property="redBagRelief" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="actually_paid" jdbcType="DECIMAL" property="actuallyPaid" />
+    <result column="all_cost" jdbcType="DECIMAL" property="allCost" />
+    <result column="all_relief" jdbcType="DECIMAL" property="allRelief" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="recommender" jdbcType="BIGINT" property="recommender" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, pay_status, receiver_name, receiver_phone, create_time, pay_time, pay_type, 
+    coupon_relief, red_bag_relief, note, actually_paid, all_cost, all_relief, user_id, 
+    recommender
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from course_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from course_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="order_id" keyProperty="orderId" parameterType="com.xxxz.xk.pojo.entity.CourseOrder" useGeneratedKeys="true">
+    insert into course_order (pay_status, receiver_name, receiver_phone, 
+      create_time, pay_time, pay_type, 
+      coupon_relief, red_bag_relief, note, 
+      actually_paid, all_cost, all_relief, 
+      user_id, recommender)
+    values (#{payStatus,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=VARCHAR}, 
+      #{couponRelief,jdbcType=DECIMAL}, #{redBagRelief,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{actuallyPaid,jdbcType=DECIMAL}, #{allCost,jdbcType=DECIMAL}, #{allRelief,jdbcType=DECIMAL}, 
+      #{userId,jdbcType=BIGINT}, #{recommender,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="order_id" keyProperty="orderId" parameterType="com.xxxz.xk.pojo.entity.CourseOrder" useGeneratedKeys="true">
+    insert into course_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="couponRelief != null">
+        coupon_relief,
+      </if>
+      <if test="redBagRelief != null">
+        red_bag_relief,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="actuallyPaid != null">
+        actually_paid,
+      </if>
+      <if test="allCost != null">
+        all_cost,
+      </if>
+      <if test="allRelief != null">
+        all_relief,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="recommender != null">
+        recommender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponRelief != null">
+        #{couponRelief,jdbcType=DECIMAL},
+      </if>
+      <if test="redBagRelief != null">
+        #{redBagRelief,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="actuallyPaid != null">
+        #{actuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="allCost != null">
+        #{allCost,jdbcType=DECIMAL},
+      </if>
+      <if test="allRelief != null">
+        #{allRelief,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="recommender != null">
+        #{recommender,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxz.xk.pojo.entity.CourseOrder">
+    update course_order
+    <set>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone = #{receiverPhone,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponRelief != null">
+        coupon_relief = #{couponRelief,jdbcType=DECIMAL},
+      </if>
+      <if test="redBagRelief != null">
+        red_bag_relief = #{redBagRelief,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="actuallyPaid != null">
+        actually_paid = #{actuallyPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="allCost != null">
+        all_cost = #{allCost,jdbcType=DECIMAL},
+      </if>
+      <if test="allRelief != null">
+        all_relief = #{allRelief,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="recommender != null">
+        recommender = #{recommender,jdbcType=BIGINT},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxz.xk.pojo.entity.CourseOrder">
+    update course_order
+    set pay_status = #{payStatus,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      coupon_relief = #{couponRelief,jdbcType=DECIMAL},
+      red_bag_relief = #{redBagRelief,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      actually_paid = #{actuallyPaid,jdbcType=DECIMAL},
+      all_cost = #{allCost,jdbcType=DECIMAL},
+      all_relief = #{allRelief,jdbcType=DECIMAL},
+      user_id = #{userId,jdbcType=BIGINT},
+      recommender = #{recommender,jdbcType=BIGINT}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+</mapper>
