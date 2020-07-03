@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: web-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 49.234.211.151:8848
+---
+server:
+  port: 80
+spring:
+  profiles: dev
+---
+server:
+  port: 80
+spring:
+  profiles: pro
+
+

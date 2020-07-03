@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: audition-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 49.234.211.151:8848
+---
+server:
+  port: 8001
+spring:
+  profiles: dev
+---
+server:
+  port: 8001
+spring:
+  profiles: pro
+

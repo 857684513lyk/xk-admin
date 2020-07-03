@@ -12,9 +12,10 @@
     <artifactId>xk-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>xk-admin</name>
-    <description>?????????</description>
+    <description>公共配置模块</description>
     <modules>
         <module>xk-common-api</module>
+        <module>xk-provider-audition-8001</module>
     </modules>
 
 
