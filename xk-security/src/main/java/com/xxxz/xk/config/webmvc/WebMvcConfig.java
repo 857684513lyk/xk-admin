@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.Resource;
 
 /**
- * creator：杜夫人
+ * creator：djx
  * date: 2020/6/24
  */
 @Configuration
