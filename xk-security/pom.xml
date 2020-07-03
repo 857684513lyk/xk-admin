@@ -9,15 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xk-provider-audition-8001</artifactId>
+    <artifactId>xk-security</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.xxxz.xk</groupId>
-            <artifactId>xk-datasource</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-
     </dependencies>
-
 
 </project>
