@@ -9,4 +9,9 @@ import lombok.Data;
 @Data
 public class UserQuery extends PageQuery {
 
+    private String userName;
+    private String passWord;
+    private String code;
+//    private String IsCodeLogin;
+
 }

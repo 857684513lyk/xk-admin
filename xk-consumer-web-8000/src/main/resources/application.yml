@@ -4,4 +4,4 @@ server:
     context-path: /pages  #统一上下文路径叫 /pages
 spring:
   application:
-    name: zk-consumer-web
+    name: xk-consumer

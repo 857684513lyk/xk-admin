@@ -1,6 +1,12 @@
 package com.xxxz.xk.config.shiro;
 
+import com.alibaba.fastjson.JSON;
+import com.xxxz.xk.pojo.dto.ResponseDTO;
+import com.xxxz.xk.pojo.entity.User;
+import com.xxxz.xk.pojo.query.UserQuery;
+import com.xxxz.xk.pojo.vo.UserVO;
 import com.xxxz.xk.service.UserServiceFeign;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -9,9 +15,14 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * creator：Administrator
@@ -19,8 +30,14 @@ import javax.annotation.Resource;
  */
 @Slf4j
 public class UserRealm extends AuthorizingRealm {
+
+
     @Resource
     UserServiceFeign userServiceFegin;
+    @Resource
+    RedisSessionDAO redisSessionDAO;
+
+
     @Resource
     RedisTemplate<String, Object> redisTemplate;
     public static final String USER_REALM = "userRealm";
@@ -37,70 +54,76 @@ public class UserRealm extends AuthorizingRealm {
         log.debug("开始认证用户");
         Session session = SecurityUtils.getSubject().getSession();
         String phone = authenticationToken.getPrincipal().toString();// 传的手机号
+
         // 根据手机号去查询用户的基本信息（因为一旦密码，是需要保存用户的一些基本信息的），包括密码
-//        UserVO loginUser = (UserVO) session.getAttribute("loginUser");// 把用户登陆信息传过来
-//        User dbUser = userServiceFegin.loginByPhone(phone);
-//        if (loginUser.getIsCodeLogin()) {// 是短信登陆
-//            Object o = redisTemplate.opsForValue().get(RedisKeyPrefixEnum.LOGIN_SMS_CODE + phone);
-//            if (o == null) {
-//                throw new UnknownAccountException("验证码已经失效");
-//            }
-//            if (!o.equals(loginUser.getCode())) {// 验证码错误
-//                throw new UnknownAccountException("验证码错误!");
-//            }
+        UserQuery loginUser = (UserQuery) session.getAttribute("loginUser");// 把用户登陆信息传过来
+
+
+        User dbUser = userServiceFegin.loginByPhone(phone);
+
+
+        if (!StringUtils.isEmpty(loginUser.getCode())) {// 是短信登陆
+            Object o = redisTemplate.opsForValue().get(phone+"loginCode");
+            if (o == null) {
+                throw new UnknownAccountException("验证码已经失效");
+            }
+            if (!o.equals(loginUser.getCode())) {// 验证码错误
+                throw new UnknownAccountException("验证码错误!");
+            }
 //            // 能到这里说明手机号和验证码已经通过了
-//            if (dbUser == null) {// 数据库没有用户，那么就马上新创建一个用户
-//                dbUser = new User();
-//                dbUser.setNickName("飞车梦想");
-//                dbUser.setPassword("123456");
-//                dbUser.setPhone(loginUser.getPhone());
-//                dbUser.setNote("验证码登陆注册而来");
+            if (dbUser == null) {// 数据库没有用户，那么就马上新创建一个用户
+                dbUser = new User();
+                dbUser.setNickName("虾看学习");
+                dbUser.setPassword("123456");
+                dbUser.setPhone(loginUser.getUserName());
+                dbUser.setNote("验证码登陆注册而来");
 //                dbUser.setPrincipal("消费者");
-//                ResponseDTO add = userServiceFegin.add(dbUser);
-//                dbUser = JSON.parseObject(JSON.toJSONString(add.getData()), User.class);
-//            }
+                ResponseDTO add = userServiceFegin.add(dbUser);
+                dbUser = JSON.parseObject(JSON.toJSONString(add.getData()), User.class);
+            }
 //
-//        } else { // 密码登录
-//            Object errorCount = redisTemplate.opsForValue().get(RedisKeyPrefixEnum.LOGIN_ERROR_COUNT + phone);
-//            Integer e = 0;
-//            if (errorCount instanceof Integer) {
-//                e = (Integer) errorCount;
-//                if (e >= 5) {
-//                    throw new LockedAccountException("短时间内密码错误次数过多，请使用短信登陆");
-//                }
-//            }
-//            if (dbUser == null) {// 表示账户名不存在
-//                e++;
-//                redisTemplate.opsForValue().set(RedisKeyPrefixEnum.LOGIN_ERROR_COUNT + phone, e, 60, TimeUnit.MINUTES);
-//                throw new UnknownAccountException("账户名或密码错误!");
-//            } else {
-//                // 首先就应该对传过来密码进行加密，必须使用之前的加密方式。
-////                String userPassword = PasswordDecoderUtil.getDecodePassword(String.valueOf((char[]) authenticationToken.getCredentials()));
-//                String userPassword = String.valueOf((char[]) authenticationToken.getCredentials());
-//                if (!userPassword.equals(dbUser.getPassword())) {
-//                    e++;
-//                    redisTemplate.opsForValue().set(RedisKeyPrefixEnum.LOGIN_ERROR_COUNT + phone, e, 60, TimeUnit.MINUTES);
-//                    throw new CredentialsException("账户名或密码错误");
-//                }
-//            }
-//        }
+        } else { // 密码登录
+            Object errorCount = redisTemplate.opsForValue().get(phone + "loginErroCount");
+            Integer e = 0;
+            if (errorCount instanceof Integer) {
+                e = (Integer) errorCount;
+                if (e >= 5) {
+                    throw new LockedAccountException("短时间内密码错误次数过多，请使用短信登陆");
+                }
+            }
+            if (dbUser == null) {// 表示账户名不存在
+                e++;
+                redisTemplate.opsForValue().set(phone + "loginErroCount", e, 60, TimeUnit.MINUTES);
+                throw new UnknownAccountException("账户名或密码错误!");
+            } else {
+                // 首先就应该对传过来密码进行加密，必须使用之前的加密方式。
+//                String userPassword = PasswordDecoderUtil.getDecodePassword(String.valueOf((char[]) authenticationToken.getCredentials()));
+                String userPassword = String.valueOf((char[]) authenticationToken.getCredentials());
+                if (!userPassword.equals(dbUser.getPassword())) {
+                    e++;
+                    redisTemplate.opsForValue().set(phone + "loginErroCount", e, 60, TimeUnit.MINUTES);
+                    throw new CredentialsException("账户名或密码错误");
+                }
+            }
+        }
 //
-//        session.setAttribute("userId", dbUser.getUserId());
-//        session.setAttribute("nickName", dbUser.getNickName());
-//        session.setAttribute("photo", dbUser.getPhoto());
-//        session.setAttribute("phone", dbUser.getPhone());
-//        session.setAttribute("realName", dbUser.getRealName());
-//        session.setAttribute("password", dbUser.getPassword());
-//        if (!StringUtils.isEmpty(dbUser.getRoles())) {
-//            ResponseDTO res = userServiceFegin.findUserRolesByPhone(dbUser.getRoles());
-//            session.setAttribute("hisRoles", res.getData());
-//        }
-//        // 这里表示登陆成功了，那么需要更新用户最近登陆时间和登陆ip以及登陆的地方
-//        User user = new User();
+        session.setAttribute("userId", dbUser.getUserId());
+        session.setAttribute("nickName", dbUser.getNickName());
+        session.setAttribute("photo", dbUser.getPhoto());
+        session.setAttribute("phone", dbUser.getPhone());
+        session.setAttribute("realName", dbUser.getRealName());
+        session.setAttribute("password", dbUser.getPassword());
+
+        if (!StringUtils.isEmpty(dbUser.getRoles())) {
+            ResponseDTO res = userServiceFegin.findUserRolesByPhone(dbUser.getRoles());
+            session.setAttribute("hisRoles", res.getData());
+        }
+        // 这里表示登陆成功了，那么需要更新用户最近登陆时间和登陆ip以及登陆的地方
+        User user = new User();
 //        user.setLastLoginIp(IpUtil.getIpAddr());
-//        user.setLastLoginTime(new Date());
-//        user.setUserId(dbUser.getUserId());
-//        userServiceFegin.updateUser(user);
+        user.setLastLoginTime(new Date());
+        user.setUserId(dbUser.getUserId());
+        userServiceFegin.updateUser(user);
         return new SimpleAuthenticationInfo(phone, authenticationToken.getCredentials(), USER_REALM);
     }
 
