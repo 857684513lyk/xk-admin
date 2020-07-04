@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxz.xk.dao.AccountFlowDao">
+  <resultMap id="BaseResultMap" type="com.xxxz.xk.pojo.entity.AccountFlow">
+    <id column="account_flow_id" jdbcType="BIGINT" property="account_flow_id" />
+    <result column="user_id" jdbcType="BIGINT" property="user_id" />
+    <result column="receive" jdbcType="DECIMAL" property="receive" />
+    <result column="pay" jdbcType="DECIMAL" property="pay" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="xb_receive" jdbcType="DECIMAL" property="xb_receive" />
+    <result column="xb_pay" jdbcType="DECIMAL" property="xb_pay" />
+    <result column="xb_balance" jdbcType="DECIMAL" property="xb_balance" />
+    <result column="voucher" jdbcType="VARCHAR" property="voucher" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    account_flow_id, user_id, receive, pay, balance, xb_receive, xb_pay, xb_balance, 
+    voucher, note, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_flow
+    where account_flow_id = #{account_flow_id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from account_flow
+    where account_flow_id = #{account_flow_id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="account_flow_id" keyProperty="account_flow_id" parameterType="com.xxxz.xk.pojo.entity.AccountFlow" useGeneratedKeys="true">
+    insert into account_flow (user_id, receive, pay, 
+      balance, xb_receive, xb_pay, 
+      xb_balance, voucher, note, 
+      create_time)
+    values (#{user_id,jdbcType=BIGINT}, #{receive,jdbcType=DECIMAL}, #{pay,jdbcType=DECIMAL}, 
+      #{balance,jdbcType=DECIMAL}, #{xb_receive,jdbcType=DECIMAL}, #{xb_pay,jdbcType=DECIMAL}, 
+      #{xb_balance,jdbcType=DECIMAL}, #{voucher,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="account_flow_id" keyProperty="account_flow_id" parameterType="com.xxxz.xk.pojo.entity.AccountFlow" useGeneratedKeys="true">
+    insert into account_flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="receive != null">
+        receive,
+      </if>
+      <if test="pay != null">
+        pay,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="xb_receive != null">
+        xb_receive,
+      </if>
+      <if test="xb_pay != null">
+        xb_pay,
+      </if>
+      <if test="xb_balance != null">
+        xb_balance,
+      </if>
+      <if test="voucher != null">
+        voucher,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=BIGINT},
+      </if>
+      <if test="receive != null">
+        #{receive,jdbcType=DECIMAL},
+      </if>
+      <if test="pay != null">
+        #{pay,jdbcType=DECIMAL},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="xb_receive != null">
+        #{xb_receive,jdbcType=DECIMAL},
+      </if>
+      <if test="xb_pay != null">
+        #{xb_pay,jdbcType=DECIMAL},
+      </if>
+      <if test="xb_balance != null">
+        #{xb_balance,jdbcType=DECIMAL},
+      </if>
+      <if test="voucher != null">
+        #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxz.xk.pojo.entity.AccountFlow">
+    update account_flow
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=BIGINT},
+      </if>
+      <if test="receive != null">
+        receive = #{receive,jdbcType=DECIMAL},
+      </if>
+      <if test="pay != null">
+        pay = #{pay,jdbcType=DECIMAL},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="xb_receive != null">
+        xb_receive = #{xb_receive,jdbcType=DECIMAL},
+      </if>
+      <if test="xb_pay != null">
+        xb_pay = #{xb_pay,jdbcType=DECIMAL},
+      </if>
+      <if test="xb_balance != null">
+        xb_balance = #{xb_balance,jdbcType=DECIMAL},
+      </if>
+      <if test="voucher != null">
+        voucher = #{voucher,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where account_flow_id = #{account_flow_id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxz.xk.pojo.entity.AccountFlow">
+    update account_flow
+    set user_id = #{user_id,jdbcType=BIGINT},
+      receive = #{receive,jdbcType=DECIMAL},
+      pay = #{pay,jdbcType=DECIMAL},
+      balance = #{balance,jdbcType=DECIMAL},
+      xb_receive = #{xb_receive,jdbcType=DECIMAL},
+      xb_pay = #{xb_pay,jdbcType=DECIMAL},
+      xb_balance = #{xb_balance,jdbcType=DECIMAL},
+      voucher = #{voucher,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where account_flow_id = #{account_flow_id,jdbcType=BIGINT}
+  </update>
+</mapper>

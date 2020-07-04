@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxz.xk.dao.StatisticsDao">
+  <resultMap id="BaseResultMap" type="com.xxxz.xk.pojo.entity.Statistics">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="date_calculated" jdbcType="DATE" property="dateCalculated" />
+    <result column="register_num" jdbcType="INTEGER" property="registerNum" />
+    <result column="login_num" jdbcType="INTEGER" property="loginNum" />
+    <result column="video_view_num" jdbcType="INTEGER" property="videoViewNum" />
+    <result column="course_num" jdbcType="INTEGER" property="courseNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="order_count" jdbcType="INTEGER" property="orderCount" />
+    <result column="order_cost" jdbcType="DECIMAL" property="orderCost" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, date_calculated, register_num, login_num, video_view_num, course_num, create_time, 
+    update_time, order_count, order_cost
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from statistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from statistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.xxxz.xk.pojo.entity.Statistics" useGeneratedKeys="true">
+    insert into statistics (date_calculated, register_num, login_num, 
+      video_view_num, course_num, create_time, 
+      update_time, order_count, order_cost
+      )
+    values (#{dateCalculated,jdbcType=DATE}, #{registerNum,jdbcType=INTEGER}, #{loginNum,jdbcType=INTEGER}, 
+      #{videoViewNum,jdbcType=INTEGER}, #{courseNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{orderCount,jdbcType=INTEGER}, #{orderCost,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.xxxz.xk.pojo.entity.Statistics" useGeneratedKeys="true">
+    insert into statistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dateCalculated != null">
+        date_calculated,
+      </if>
+      <if test="registerNum != null">
+        register_num,
+      </if>
+      <if test="loginNum != null">
+        login_num,
+      </if>
+      <if test="videoViewNum != null">
+        video_view_num,
+      </if>
+      <if test="courseNum != null">
+        course_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="orderCount != null">
+        order_count,
+      </if>
+      <if test="orderCost != null">
+        order_cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dateCalculated != null">
+        #{dateCalculated,jdbcType=DATE},
+      </if>
+      <if test="registerNum != null">
+        #{registerNum,jdbcType=INTEGER},
+      </if>
+      <if test="loginNum != null">
+        #{loginNum,jdbcType=INTEGER},
+      </if>
+      <if test="videoViewNum != null">
+        #{videoViewNum,jdbcType=INTEGER},
+      </if>
+      <if test="courseNum != null">
+        #{courseNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCount != null">
+        #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderCost != null">
+        #{orderCost,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxz.xk.pojo.entity.Statistics">
+    update statistics
+    <set>
+      <if test="dateCalculated != null">
+        date_calculated = #{dateCalculated,jdbcType=DATE},
+      </if>
+      <if test="registerNum != null">
+        register_num = #{registerNum,jdbcType=INTEGER},
+      </if>
+      <if test="loginNum != null">
+        login_num = #{loginNum,jdbcType=INTEGER},
+      </if>
+      <if test="videoViewNum != null">
+        video_view_num = #{videoViewNum,jdbcType=INTEGER},
+      </if>
+      <if test="courseNum != null">
+        course_num = #{courseNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderCount != null">
+        order_count = #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderCost != null">
+        order_cost = #{orderCost,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxz.xk.pojo.entity.Statistics">
+    update statistics
+    set date_calculated = #{dateCalculated,jdbcType=DATE},
+      register_num = #{registerNum,jdbcType=INTEGER},
+      login_num = #{loginNum,jdbcType=INTEGER},
+      video_view_num = #{videoViewNum,jdbcType=INTEGER},
+      course_num = #{courseNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      order_count = #{orderCount,jdbcType=INTEGER},
+      order_cost = #{orderCost,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
