@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 作者：森林djx
+ * 作者：森林杜夫人
  * 给这个请求带上用户名和密码
  */
 @FeignClient(value = "user-rest", path = "user", configuration = FeignClientConfig.class)

@@ -36,12 +36,12 @@ public class RedisConfig {
      */
     @Bean
     public LettuceConnectionFactory lettuceConnectionFactory() {
-        String HOST = "120.25.223.121";// 本地hosts文件中配置 dev环境填写公网ip
+        String HOST = "8.129.212.40";// 本地hosts文件中配置 dev环境填写公网ip
 
         String[] activeProfiles = environment.getActiveProfiles();
         if (activeProfiles.length > 0) {
             if ("pro".equals(activeProfiles[0])) {
-                HOST = "172.18.25.51";// 正式环境填写内网ip
+                HOST = "172.18.106.153";// 正式环境填写内网ip
             }
         }
         logger.info("RRRRRRRRRRRRR=========Redis地址：" + HOST);

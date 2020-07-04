@@ -1,0 +1,7 @@
+server:
+  port: 8012  #实际运行的端口是8001，因为我们部署到服务器上面的时候是需要nginx代理的。
+spring:
+  application:
+    name: curriculum-rest  #微服务的名称
+  main:
+    allow-bean-definition-overriding: true #允许多个接口调用同一服务

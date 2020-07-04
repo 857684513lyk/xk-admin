@@ -20,6 +20,7 @@
         <module>xk-datasource</module>
         <module>xk-provider-audition-8001</module>
         <module>xk-security</module>
+        <module>xk-curriculum-rest-8012</module>
     </modules>
 
 

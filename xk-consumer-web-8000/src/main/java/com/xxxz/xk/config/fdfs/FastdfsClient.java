@@ -23,8 +23,8 @@ public class FastdfsClient {
     private String LINUX_UPLOAD_PATH = "/upload/";// 这个操作根本没有太大的必要，如果要压缩，需要先将文件保存到磁盘，然后再从磁盘中获取与二进制数据
     Logger logger = LoggerFactory.getLogger(FastdfsClient.class);
 
-    private String trackers_pro = "120.25.223.121";// 正式环境
-    private String fileDom = "120.25.223.121:8888";// storage访问的域名地址（给前端用的） 8888是storage默认端口
+    private String trackers_pro = "8.129.212.40";// 正式环境
+    private String fileDom = "8.129.212.40:8888";// storage访问的域名地址（给前端用的） 8888是storage默认端口
     // 对于前端来说，访问图片的时候，前后端分离的时候，一定要加上图片域名前缀。。。+图片保存路径
     private StorageServer storageServer;// 声明一个storageServer
 
@@ -34,8 +34,8 @@ public class FastdfsClient {
         String[] activeProfiles = environment.getActiveProfiles();// 获取当前环境情况
         if (activeProfiles.length > 0) {
             if ("dev".equals(activeProfiles[0])) {
-                trackers_pro = "120.25.223.121";
-                fileDom = "http://120.25.223.121:8888";// 图片地址前缀
+                trackers_pro = "8.129.212.40";
+                fileDom = "http://8.129.212.40:8888";// 图片地址前缀
             }
         }
         logger.warn("FastDfs的环境：地址" + trackers_pro);

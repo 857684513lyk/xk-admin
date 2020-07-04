@@ -33,7 +33,6 @@ public class NacosCommonConfig {
                 serverAddr = "172.17.0.4:8848";// 正式环境的私网
             } else if ("dev".equals(activeProfiles[0])) {
                 serverAddr = "49.234.211.151:8848";// 开发环境用测试服务器的公网
-
                 nacosDiscoveryProperties.setWatchDelay(2000L);// 从nacos获取服务列表的频率（2秒一次）
                 nacosDiscoveryProperties.setHeartBeatInterval(1);// 给nacos发送心跳的时间间隔
                 nacosDiscoveryProperties.setHeartBeatTimeout(3);// nacos多少秒没有收到这个心跳，就直接把这个微服务删除
