@@ -27,11 +27,11 @@ public interface StatisticsFeign {
     PageDTO listStatistics(StatisticsQuery query);// 第二种：最喜欢 post里边body放的参数
 
     @RequestMapping("/addStatistics")
-    ResponseDTO addAudition(Statistics audition);
+    ResponseDTO addAudition(Statistics statistics);
 
     @RequestMapping("/deleteStatistics")
-    ResponseDTO deleteStatistics(Statistics audition);
+    ResponseDTO deleteStatistics(Statistics statistics);
 
     @RequestMapping("/updateStatistics")
-    ResponseDTO updateStatistics(Statistics audition);
+    ResponseDTO updateStatistics(Statistics statistics);
 }
