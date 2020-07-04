@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxz.xk.dao.AuditionDao">
+  <resultMap id="BaseResultMap" type="com.xxxz.xk.pojo.entity.Audition">
+    <id column="audition_id" jdbcType="BIGINT" property="auditionId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="author" jdbcType="BIGINT" property="author" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="user_img" jdbcType="VARCHAR" property="userImg" />
+    <result column="credibility" jdbcType="INTEGER" property="credibility" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    audition_id, title, answer, author, nick_name, user_img, credibility
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from audition
+    where audition_id = #{auditionId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from audition
+    where audition_id = #{auditionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="audition_id" keyProperty="auditionId" parameterType="com.xxxz.xk.pojo.entity.Audition" useGeneratedKeys="true">
+    insert into audition (title, answer, author, 
+      nick_name, user_img, credibility
+      )
+    values (#{title,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{author,jdbcType=BIGINT}, 
+      #{nickName,jdbcType=VARCHAR}, #{userImg,jdbcType=VARCHAR}, #{credibility,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="audition_id" keyProperty="auditionId" parameterType="com.xxxz.xk.pojo.entity.Audition" useGeneratedKeys="true">
+    insert into audition
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="userImg != null">
+        user_img,
+      </if>
+      <if test="credibility != null">
+        credibility,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="credibility != null">
+        #{credibility,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxz.xk.pojo.entity.Audition">
+    update audition
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userImg != null">
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="credibility != null">
+        credibility = #{credibility,jdbcType=INTEGER},
+      </if>
+    </set>
+    where audition_id = #{auditionId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxz.xk.pojo.entity.Audition">
+    update audition
+    set title = #{title,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      author = #{author,jdbcType=BIGINT},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      user_img = #{userImg,jdbcType=VARCHAR},
+      credibility = #{credibility,jdbcType=INTEGER}
+    where audition_id = #{auditionId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,18 @@
+package com.xxxz.xk.dao;
+
+
+import com.xxxz.xk.pojo.entity.AppConfig;
+
+public interface AppConfigDao {
+    int deleteByPrimaryKey(Integer configId);
+
+    int insert(AppConfig record);
+
+    int insertSelective(AppConfig record);
+
+    AppConfig selectByPrimaryKey(Integer configId);
+
+    int updateByPrimaryKeySelective(AppConfig record);
+
+    int updateByPrimaryKey(AppConfig record);
+}
