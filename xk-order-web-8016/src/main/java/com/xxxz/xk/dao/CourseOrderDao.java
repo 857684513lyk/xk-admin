@@ -2,6 +2,9 @@ package com.xxxz.xk.dao;
 
 
 import com.xxxz.xk.pojo.entity.CourseOrder;
+import com.xxxz.xk.pojo.query.CourseOrderQuery;
+
+import java.util.List;
 
 public interface CourseOrderDao {
     int deleteByPrimaryKey(Long orderId);
@@ -15,4 +18,8 @@ public interface CourseOrderDao {
     int updateByPrimaryKeySelective(CourseOrder record);
 
     int updateByPrimaryKey(CourseOrder record);
+
+    List<CourseOrder> findOrderByUser(CourseOrderQuery courseOrderQuery);
+
+    int findOrderCountByUser(CourseOrderQuery courseOrderQuery);
 }

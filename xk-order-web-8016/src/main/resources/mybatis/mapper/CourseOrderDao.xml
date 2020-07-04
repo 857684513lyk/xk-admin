@@ -29,6 +29,7 @@
     from course_order
     where order_id = #{orderId,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from course_order
     where order_id = #{orderId,jdbcType=BIGINT}
@@ -202,4 +203,26 @@
       recommender = #{recommender,jdbcType=BIGINT}
     where order_id = #{orderId,jdbcType=BIGINT}
   </update>
+
+<!-- 字写 -->
+  <select id="findOrderByUser" resultType="com.xxxz.xk.pojo.entity.CourseOrder">
+    select <include refid="Base_Column_List"/>
+    from course_order;
+    <where>
+      <if test="userId!=null">
+        user_id=#{userId}
+      </if>
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="findOrderCountByUser" resultType="java.lang.Integer">
+    select COUNT(*)
+    from course_order;
+    <where>
+      <if test="userId!=null">
+        user_id=#{userId}
+      </if>
+    </where>
+    limit #{start},#{limit}
+  </select>
 </mapper>

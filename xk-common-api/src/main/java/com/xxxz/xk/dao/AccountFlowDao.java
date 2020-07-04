@@ -1,6 +1,7 @@
 package com.xxxz.xk.dao;
 
-import generate.AccountFlow;
+
+import com.xxxz.xk.pojo.entity.AccountFlow;
 
 public interface AccountFlowDao {
     int deleteByPrimaryKey(Long account_flow_id);

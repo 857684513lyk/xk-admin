@@ -1,6 +1,7 @@
 package com.xxxz.xk.dao;
 
 
+import com.xxxz.xk.pojo.entity.Type;
 
 public interface TypeDao {
     int deleteByPrimaryKey(Integer typeId);

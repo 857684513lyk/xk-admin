@@ -7,10 +7,10 @@
         <artifactId>xk-admin</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>xk-order-web-8016</artifactId>
+    <artifactId>xk-brainmap-rest-8019</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>xk-order-web-8016</name>
-    <description>这是订单模块</description>
+    <name>xk-brainmap-rest-8019</name>
+    <description>脑图</description>
 
     <properties>
         <java.version>1.8</java.version>

@@ -32,7 +32,7 @@
     from course
     where course_id = #{courseId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from course
     where course_id = #{courseId,jdbcType=BIGINT}
   </delete>
@@ -237,4 +237,8 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where course_id = #{courseId,jdbcType=BIGINT}
   </update>
+
+
+
+
 </mapper>

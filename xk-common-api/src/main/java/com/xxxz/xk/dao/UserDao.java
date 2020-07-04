@@ -1,6 +1,7 @@
 package com.xxxz.xk.dao;
 
 
+import com.xxxz.xk.pojo.entity.User;
 
 public interface UserDao {
     int deleteByPrimaryKey(Long userId);

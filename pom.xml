@@ -15,11 +15,13 @@
     <name>xk-admin</name>
     <description>公共配置模块</description>
     <modules>
+        <module>xk-order-web-8016</module>
         <module>xk-common-api</module>
         <module>xk-consumer-web-8000</module>
         <module>xk-datasource</module>
         <module>xk-provider-audition-8001</module>
         <module>xk-security</module>
+        <module>xk-brainmap-rest-8019</module>
     </modules>
 
 
