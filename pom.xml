@@ -14,7 +14,7 @@
     <name>xk-admin</name>
     <description>父级公共配置模块</description>
     <modules>
-        <module>xk-order-web-8016</module>
+        <module>xk-order-rest-8016</module>
         <module>xk-common-api</module>
         <module>xk-consumer-web-8000</module>
         <module>xk-datasource</module>

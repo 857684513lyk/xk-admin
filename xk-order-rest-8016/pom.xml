@@ -7,7 +7,7 @@
         <artifactId>xk-admin</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>xk-order-web-8016</artifactId>
+    <artifactId>xk-order-rest-8016</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>xk-order-web-8016</name>
     <description>这是订单模块</description>
