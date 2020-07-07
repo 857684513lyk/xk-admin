@@ -155,4 +155,23 @@
       nick_name = #{nickName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+<!-- SQL -->
+  <select id="ajaxListBrainMap" resultType="com.xxxz.xk.pojo.vo.BrainMapVO">
+    select <include refid="Base_Column_List"/>
+    from brain_map
+    <where>
+      1=1
+    </where>
+    limit #{start},#{limit}
+  </select>
+  <select id="ajaxListBrainMapCount" resultType="java.lang.Integer">
+    select COUNT(*)
+    from brain_map
+    <where>
+      1=1
+    </where>
+  </select>
+
 </mapper>

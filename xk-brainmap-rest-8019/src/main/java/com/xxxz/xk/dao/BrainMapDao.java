@@ -2,6 +2,10 @@ package com.xxxz.xk.dao;
 
 
 import com.xxxz.xk.pojo.entity.BrainMap;
+import com.xxxz.xk.pojo.query.BrainMapQuery;
+import com.xxxz.xk.pojo.vo.BrainMapVO;
+
+import java.util.List;
 
 public interface BrainMapDao {
     int deleteByPrimaryKey(Long id);
@@ -15,4 +19,8 @@ public interface BrainMapDao {
     int updateByPrimaryKeySelective(BrainMap record);
 
     int updateByPrimaryKey(BrainMap record);
+
+    List<BrainMapVO> ajaxListBrainMap(BrainMapQuery brainMapQuery);
+
+    int ajaxListBrainMapCount(BrainMapQuery brainMapQuery);
 }
