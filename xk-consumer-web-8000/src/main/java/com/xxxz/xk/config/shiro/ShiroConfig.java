@@ -22,6 +22,14 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * @Classname ShiroConfig
+ * @Description Shiro配置类
+ * @Date 2020/7/4 11:33
+ * @CreateComputer by PC
+ * @Created by cxd
+ */
 // 这样springboot才会去读这个类
 @SpringBootConfiguration
 public class ShiroConfig {
@@ -139,7 +147,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new HashMap<>();
         filterChainDefinitionMap.put("/logout", "logout");
 //        filterChainDefinitionMap.put("/login", "user");    // 定义内置登录处理,表单需要加method=post
-        filterChainDefinitionMap.put("/back/**", "checkLogin");//pages/back/**这样的路径需要登陆检测
+//        filterChainDefinitionMap.put("/back/**", "checkLogin");//pages/back/**这样的路径需要登陆检测
         filterChainDefinitionMap.put("/*", "anon");// 所有不用检测
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

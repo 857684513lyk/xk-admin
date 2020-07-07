@@ -97,18 +97,40 @@ public class ResponseDTO implements Serializable {
 
 
     /**
+     * 调用成功的时候，返回成功的状态和消息
+     *
+     * @param msg
+     * @param status
+     * @return
+     */
+    public static ResponseDTO ok(String msg, Integer status) {
+        return new ResponseDTO(msg, status);
+    }
+
+    /**
      * 调用成功的时候，返回成功的状态
      *
      * @return
      */
     public static ResponseDTO get(boolean res) {
         if (res) {
-            return ResponseDTO.ok(successMsg);
+            return ResponseDTO.ok(successMsg,200);
         } else {
-            return ResponseDTO.fail(errorMsg);
+            return ResponseDTO.fail(errorMsg,500);
         }
     }
-
+    /**
+     * 传入1时返回成功，否则返回失败
+     *
+     * @return
+     */
+    public static ResponseDTO get(Integer count) {
+        if (count == 1 ) {
+            return ResponseDTO.ok(successMsg,200);
+        } else {
+            return ResponseDTO.fail(errorMsg,500);
+        }
+    }
     /**
      * 直接将对象返回
      *
@@ -116,11 +138,13 @@ public class ResponseDTO implements Serializable {
      */
     public static ResponseDTO get(Object vo) {
         if (vo != null) {
-            return ResponseDTO.ok(successMsg, vo);
+            return ResponseDTO.ok(successMsg,vo);
         } else {
             return ResponseDTO.fail(errorMsg);
         }
     }
+
+
 
 
     public static ResponseDTO ok(String msg) {
@@ -146,6 +170,16 @@ public class ResponseDTO implements Serializable {
      * 调用失败的时候，返回失败的状态
      */
     public static ResponseDTO fail(String msg) {
-        return new ResponseDTO(msg, null, null, null);
+
+        return new ResponseDTO(msg, null, 500, null);
     }
+
+    /**
+     * 调用失败的时候，返回失败的状态和消息
+     */
+    public static ResponseDTO fail(String msg,Integer status) {
+        return new ResponseDTO(msg,  status);
+    }
+
+
 }

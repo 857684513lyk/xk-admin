@@ -1,5 +1,0 @@
-server:
-  port: 8001  #实际运行的端口是8001，因为我们部署到服务器上面的时候是需要nginx代理的。
-spring:
-  application:
-    name: user-rest  #微服务的名称

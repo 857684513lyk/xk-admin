@@ -4,6 +4,7 @@ package com.xxxz.xk.service;
 import com.xxxz.xk.config.feign.FeignClientConfig;
 import com.xxxz.xk.pojo.dto.PageDTO;
 import com.xxxz.xk.pojo.dto.ResponseDTO;
+import com.xxxz.xk.pojo.entity.User;
 import com.xxxz.xk.pojo.query.UserQuery;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +28,34 @@ public interface UserServiceFeign {
      * 对用户进行分页查询
      * 参数：
      * @param query
-     * @return
+     * @return PageDTO
      */
     @RequestMapping("/listUser")
     PageDTO listUser(UserQuery query);// 第二种：最喜欢 post里边body放的参数
 
+
+
+    /**
+     *
+     * 功能描述: <br>
+     * 〈判断传入手机号码是否存在〉
+     * @Param: phone
+     * @Return: boolean
+     * @Author: cxd
+     * @Date: 2020/7/4 15:04
+     */
+    @RequestMapping("/checkPhoneExist")
+    boolean checkPhoneExist(String phone);
+
+    @RequestMapping("/loginByPhone")
+    User loginByPhone(String phone);
+
+    @RequestMapping("add")
+    ResponseDTO add(User dbUser);
+
+    @RequestMapping("findUserRolesByPhone")
+    ResponseDTO findUserRolesByPhone(String roles);
+
+    @RequestMapping("updateUser")
+    Integer updateUser(User user);
 }

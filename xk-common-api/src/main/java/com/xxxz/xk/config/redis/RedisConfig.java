@@ -1,10 +1,11 @@
 package com.xxxz.xk.config.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -19,15 +20,18 @@ import javax.annotation.Resource;
 import java.time.Duration;
 
 /**
- * creator：Administrator
- * date:2019/11/18
- * redis一个配置文件类
+ * @Classname RedisConfig
+ * @Description redis一个配置文件类
+ * @Date 2020/7/4 9:55
+ * @CreateComputer by PC
+ * @Created by cxd
  */
-@SpringBootConfiguration
+@Configuration
 public class RedisConfig {
     Logger logger = LoggerFactory.getLogger(RedisConfig.class);
     @Resource
     Environment environment;
+
 
     /**
      * redis的集群配置
@@ -113,5 +117,4 @@ public class RedisConfig {
         container.setConnectionFactory(lettuceConnectionFactory);
         return container;
     }
-
 }

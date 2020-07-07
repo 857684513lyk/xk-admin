@@ -7,19 +7,24 @@
         <groupId>com.xxxz.xk</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <description>8000 网关模块 </description>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xk-consumer-web-8000</artifactId>
+
+
     <dependencies>
-        <dependency>
-            <groupId>com.xxxz.xk</groupId>
-            <artifactId>xk-common-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.xxxz.xk</groupId>
+            <artifactId>xk-datasource</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>org.csource</groupId>
@@ -32,6 +37,7 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.11</version>
         </dependency>
+
         <!--shiro的核心依赖包 -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -47,11 +53,13 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-    </dependencies>
 
+
+    </dependencies>
 
 </project>

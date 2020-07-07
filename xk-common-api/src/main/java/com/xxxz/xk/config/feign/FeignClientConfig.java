@@ -1,21 +1,20 @@
 package com.xxxz.xk.config.feign;
 
-/**
- * creator：Administrator
- * date:2019/11/20
- */
-
 import feign.auth.BasicAuthRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Map;
 
 /**
- * @author lh
- * @date 2019/7/19 10:53
+ * @Classname FeignClientConfig
+ * @Description Feign一个配置文件类
+ * @Date 2020/7/4 9:51
+ * @CreateComputer by PC
+ * @Created by cxd
  */
 @Configuration
 public class FeignClientConfig {
@@ -39,6 +38,6 @@ public class FeignClientConfig {
         feignClientProperties.setConfig(config);
 
         // 注意！BasicAuthRequestInterceptor这个类是feign.auth包，千万不要导错了 默认的加密方式：
-        return new BasicAuthRequestInterceptor("qianfeng", "java");
+        return new BasicAuthRequestInterceptor("xk", "java");
     }
 }

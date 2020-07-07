@@ -1,5 +1,6 @@
 package com.xxxz.xk;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -18,9 +19,9 @@ import java.util.TimeZone;
  */
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.xxxz.xk.service"})
-public class XkConsumerWeb8000Application {
-    Logger log = LoggerFactory.getLogger(XkConsumerWeb8000Application.class);
+@MapperScan(basePackages = {"com.xxxz.xk.dao"})
+public class XkUserRest8024Application {
+    Logger log = LoggerFactory.getLogger(XkUserRest8024Application.class);
 
     @PostConstruct
     void setTimezone() {
@@ -29,7 +30,7 @@ public class XkConsumerWeb8000Application {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(XkConsumerWeb8000Application.class, args);
+        SpringApplication.run(XkUserRest8024Application.class, args);
     }
 
 }

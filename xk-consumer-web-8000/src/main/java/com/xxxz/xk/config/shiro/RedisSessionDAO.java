@@ -22,7 +22,7 @@ public class RedisSessionDAO extends EnterpriseCacheSessionDAO {// 继承了企�
 
     // 到Redis里边去增删改查
     @Override
-    protected Serializable doCreate(Session session) {// 当前的这个session对象，将它保存到redis里边去
+    public Serializable doCreate(Session session) {// 当前的这个session对象，将它保存到redis里边去
 //        Serializable sessionid = super.doCreate(session);
         Serializable sessionId = SESSION_PREFIX + UUID.randomUUID();// 给前端的token: SZP_SESSION_UUID
         this.assignSessionId(session, sessionId);
