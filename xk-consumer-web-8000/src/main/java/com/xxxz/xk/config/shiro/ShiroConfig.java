@@ -22,14 +22,6 @@ import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * @Classname ShiroConfig
- * @Description Shiro配置类
- * @Date 2020/7/4 11:33
- * @CreateComputer by PC
- * @Created by cxd
- */
 // 这样springboot才会去读这个类
 @SpringBootConfiguration
 public class ShiroConfig {
